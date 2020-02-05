@@ -87,33 +87,51 @@ void strtoup(char palabra[]){
 
 int main (){
     char letra;
-    ocultarLetras();
 
-    for (int i = 1;i <= 3; i++){
-        printf("Letra: ");
+    ocultarLetras();
+    
+    while (indice < 10){
+        int acierto = 0;
+
+        printf("\nCompleta la palabra: %s",adivinanzas[indice]);
+
+        for (int i = 1;i <= 3; i++){
+            printf("Letra: ");
+            letra = leerLetra();
+
+            if (!buscarLetra(letra)){
+                printf("La letra %c no existe en la palabra\n", letra);
+            }
+        }
+
+        for (;intentos <= 3; intentos++){
+            char palabra[20];
+
+            printf("Intento %d\nLa palabra es: ",intentos);
+            scanf("%s",palabra);
+
+            if (adivinaPalabra(palabra)){
+                acierto = 1;
+                printf("Acertaste!!! (　＾∇＾) \n");
+                break;
+            }
+
+            printf("Siguiente intento (ง •̀_•́)ง\n");
+
+        }
+
+        if (!acierto)
+            printf("Ahorcado!!! o(╥﹏╥)o");
+
+        printf("Continuar? (S/N) ");
         letra = leerLetra();
 
-        if (!buscarLetra(letra)){
-            printf("La letra %c no existe en la palabra\n", letra);
-        }
-    }
-
-    for (;intentos <= 3; intentos++){
-        char palabra[20];
-
-        printf("Intento %d\nLa palabra es: ",intentos);
-        scanf("%s",palabra);
-
-        if (adivinaPalabra(palabra)){
-            printf("Acertaste!!! (　＾∇＾) \n");
+        if (letra != 'S'){
             break;
         }
 
-        printf("Siguiente intento (ง •̀_•́)ง\n");
-
-    }
-
-    printf("Ahorcado!!! o(╥﹏╥)o");
+        indice++;
+    }  
 
     return 0;
 }
