@@ -13,6 +13,7 @@ char palabras[][20] = {"GRYFFINDOR","SLYTERIN","HUFFLEPUFF","RAVENCLAW","HOGWART
 char adivinanzas[10][20];
 int intentos = 1;
 int indice = 0;
+int puntuacion = 0;
 
 void ocultarLetras(){
     for(int i = 0; i<10; i++){
@@ -28,6 +29,12 @@ void ocultarLetras(){
 
         strcpy(adivinanzas[i], temp);
         printf("%s\n",adivinanzas[i]);
+    }
+}
+
+void strtoup(char palabra[]){
+    for (int i = 0; i < strlen(palabra); i++){
+        palabra[i] = toupper(palabra[i]);
     }
 }
 
@@ -74,15 +81,9 @@ char leerLetra(){
             return temp;
         }
 
-        printf("Debe ingresar una letra");
+        printf("Debe ingresar una letra: ");
     }
     
-}
-
-void strtoup(char palabra[]){
-    for (int i = 0; i < strlen(palabra); i++){
-        palabra[i] = toupper(palabra[i]);
-    }
 }
 
 int main (){
@@ -91,47 +92,51 @@ int main (){
     ocultarLetras();
     
     while (indice < 10){
-        int acierto = 0;
 
-        printf("\nCompleta la palabra: %s",adivinanzas[indice]);
+        printf("\nPalabra %d: %s\n",indice+1,adivinanzas[indice]);
 
         for (int i = 1;i <= 3; i++){
             printf("Letra: ");
             letra = leerLetra();
 
             if (!buscarLetra(letra)){
-                printf("La letra %c no existe en la palabra\n", letra);
+                printf("(ー_ー)!! La letra %c no existe en la palabra\n", letra);
             }
         }
 
-        for (;intentos <= 3; intentos++){
+        while (intentos <= 3){
             char palabra[20];
 
-            printf("Intento %d\nLa palabra es: ",intentos);
+            printf("Intento %d\n\tCompleta la palabra: ",intentos);
             scanf("%s",palabra);
+            fflush(stdin);
+            __fpurge(stdin);
 
             if (adivinaPalabra(palabra)){
-                acierto = 1;
-                printf("Acertaste!!! (　＾∇＾) \n");
+                printf("\n(^_^)/ ACERTASTE! +1p \n");
+                puntuacion++;
                 break;
             }
 
-            printf("Siguiente intento (ง •̀_•́)ง\n");
-
+            printf("\n (－‸ლ) Siguiente intento \n");
+            intentos++;
         }
 
-        if (!acierto)
-            printf("Ahorcado!!! o(╥﹏╥)o");
+        if (intentos > 3)
+            printf("\n((+_+)) AHORCADO! 0p \n");
 
-        printf("Continuar? (S/N) ");
+        printf("\nContinuar? (S/N) ");
         letra = leerLetra();
 
         if (letra != 'S'){
             break;
         }
 
+        intentos = 1;
         indice++;
     }  
+
+    printf("\n(^_^)/ Puntaje final %d puntos \n",puntuacion);
 
     return 0;
 }
