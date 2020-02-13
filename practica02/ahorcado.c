@@ -89,6 +89,8 @@ char leerLetra(){
 int main (){
     char letra;
 
+    printf("Palabras del universo de Harry Potter\n");
+
     ocultarLetras();
     
     while (indice < 10){
@@ -100,7 +102,7 @@ int main (){
             letra = leerLetra();
 
             if (!buscarLetra(letra)){
-                printf("(ー_ー)!! La letra %c no existe en la palabra\n", letra);
+                printf("(ー_ー)! La letra %c no existe en la palabra\n", letra);
             }
         }
 
