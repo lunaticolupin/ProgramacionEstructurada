@@ -1,6 +1,6 @@
 /**
  * Autor: Alejandro Ramírez Cruz
- * Fecha: 04/02/2020
+ * Fecha: 12/02/2020
  * Descripción: Juego del Ahorcado
  **/
 
@@ -67,7 +67,6 @@ int main(){
 
         strcpy(adivina[indice],temp);
         printf("%s\n", adivina[indice]);
-
         intentos++;
     }
 
