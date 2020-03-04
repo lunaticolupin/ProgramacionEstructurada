@@ -9,6 +9,8 @@ struct MATERIA{
 	int calificacion;
 };
 
+
+
 int lee_calificacion(){
 	int temp = -1;
 	
@@ -19,7 +21,7 @@ int lee_calificacion(){
 	return temp;
 }
 
-void lee_clave(char *clave[]){
+void lee_clave(char clave[]){
 	char temp[6];
 	int valido = 0;
 
@@ -48,32 +50,35 @@ void lee_clave(char *clave[]){
 			printf("Formato no válido\nClave:");
 			valido = 0;
 		}
-
 	}
-
+	
 	strcpy(clave,temp);
 }
 
 void captura_materias(struct MATERIA materias[]){
     printf("Introduce los datos\n");
 
-    for (int i=0; i<5; i++){
+    for (int i=0; i<1; i++){
         printf("Clave: ");
-	    //scanf("%s", materias[i].clave);
 		lee_clave(materias[i].clave);
-
+		//scanf("%s",materias[i].clave);
+		fflush(stdin);
+        __fpurge(stdin);
 	    printf("Materia: ");
-	    gets(materias[i].nombre);
+		scanf("%20[^\n]",materias[i].nombre);
+		printf("%s %s",materias[i].clave,materias[i].nombre);
 
 	    printf("Calificación: ");
 	    materias[i].calificacion = lee_calificacion();
+		
+		printf("%s %s",materias[i].clave,materias[i].nombre);
     }
 	
 }
 
 float promedio (struct MATERIA materias[]){
 	float sumatoria=0;
-	for (int i=0; i<5; i++){
+	for (int i=0; i<1; i++){
 		sumatoria += materias[i].calificacion;
 	}
 
@@ -93,7 +98,8 @@ int busca_calificacion (struct MATERIA materias[], char clave_materia[]){
 void muestra_boleta(char nombre_alumno[], struct MATERIA materias[]){
 	printf("Alumno: %s\n", nombre_alumno);
 	for (int i=0; i<5; i++){
-		printf("%d\t%s\t%s\t%d\n",i, materias[i].clave, materias[i].nombre, materias[i].calificacion);
+		//printf("%d\t%s\t%s\t%d\n",i, materias[i].clave, materias[i].nombre, materias[i].calificacion);
+		printf("%s",materias[i].clave);
 	}
 }
 
@@ -103,7 +109,9 @@ int main(){
 	char clave_materia[10];
 
 	printf("Nombre del alumno: ");
-	gets(nombre_alumno);
+	fgets(nombre_alumno,10,stdin);
+	fflush(stdin);
+        __fpurge(stdin);
 
     captura_materias(materias);
 	muestra_boleta(nombre_alumno, materias);
