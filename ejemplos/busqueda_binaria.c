@@ -24,7 +24,7 @@ void generar_elementos(int size){
     srand((unsigned) time(NULL));
 
     for(int i=0; i<size; i++){
-        arreglo[i]=rand()%size;
+        arreglo[i]=rand()%1000;
     }
 
     imprime(arreglo,size);
@@ -114,9 +114,32 @@ void rapido(int arreglo[], int inferior, int superior){
     rapido(arreglo,i+1, superior);
 }
 
+void busqueda(int arreglo[], int size, int valor){
+    int primero = 0, ultimo = size-1, medio = (primero+ultimo)/2;
+    int encontrado = 0;
+
+    while (primero <= ultimo){
+        if (arreglo[medio] < valor){
+            primero = medio + 1;
+        }else if(arreglo[medio] == valor){
+            printf("El valor esta en la posición %d\n", medio);
+            encontrado++;
+            break;
+        }else{
+            ultimo = medio - 1;
+        }
+
+        medio = (primero + ultimo)/2;
+    }
+
+    if (!encontrado){
+        printf("No se encontró el valor\n");
+    }
+}
+
 int main(){
     
-    int n=0;
+    int n=0, valor=0;
 
     printf("Tamaño del arreglo: ");
     scanf("%d",&n);
@@ -128,4 +151,9 @@ int main(){
     burbuja(arreglo,n);
 
     imprime(arreglo,n);
+
+    printf("Valor a buscar: ");
+    scanf("%d", &valor);
+
+    busqueda(arreglo, n, valor);
 }

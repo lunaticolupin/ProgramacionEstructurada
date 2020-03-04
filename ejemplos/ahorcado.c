@@ -9,7 +9,7 @@
 #include <string.h>
 #include <stdio_ext.h>
 
-char palabras[][20] = {"GRYFFINDOR","SLYTERIN","HUFFLEPUFF","RAVENCLAW","HOGWARTS","QUIDDITCH","LUNATICO","CANUTO","CORNAMENTA","COLAGUSANO"};
+char palabras[10][20] = {"GRYFFINDOR","SLYTERIN","HUFFLEPUFF","RAVENCLAW","HOGWARTS","QUIDDITCH","LUNATICO","CANUTO","CORNAMENTA","COLAGUSANO"};
 char adivina[10][20];
 int intentos = 1;
 int indice = 0;
@@ -33,6 +33,8 @@ int main(){
         strcpy(adivina[i], temp);
         printf("%s\n",adivina[i]);
     }
+
+    for (indice=0; indice<10; indice++){
 
     printf("Completa la palabra %s\n", adivina[indice]);
 
@@ -96,5 +98,7 @@ int main(){
 
     if(intentos>3){
         printf("Ahorcado");
+    }
+
     }
 }
