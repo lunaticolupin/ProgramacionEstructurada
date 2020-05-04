@@ -4,7 +4,7 @@
 
  /* estructura auto_referenciada */
 struct nodoLista {
-    int dato; 
+    float dato; 
     struct nodoLista *ptrSiguiente; 
 }; /* fin de la estructura nodoLista */
 
@@ -12,8 +12,8 @@ typedef struct nodoLista NodoLista; /* sinónimo para la estructura nodoLista */
 typedef NodoLista *ptrNodoLista; /* sinónimo para de NodoLista* */
 
 /* prototipos */
-void insertar( ptrNodoLista *ptrS, int valor );
-char eliminar( ptrNodoLista *ptrS, int valor );
+void insertar( ptrNodoLista *ptrS, float valor );
+float eliminar( ptrNodoLista *ptrS, float valor );
 int estaVacia( ptrNodoLista ptrS );
 void imprimeLista( ptrNodoLista ptrActual );
 void instrucciones( void );
@@ -25,7 +25,7 @@ int main()
 { 
     ptrNodoLista ptrInicial = NULL; 
     int eleccion; 
-    int elemento;
+    float elemento;
 
     instrucciones(); /* despliega el menú */
     printf( "? " );
@@ -38,7 +38,7 @@ int main()
 
             case 1:
                 printf( "Numero: " );
-                scanf( "\n%d", &elemento );
+                scanf( "\n%f", &elemento );
                 insertar( &ptrInicial, elemento ); /* inserta el elemento en la lista */
                 imprimeLista( ptrInicial );
                 break;
@@ -48,10 +48,10 @@ int main()
                 /* si la lista no está vacía */
                 if ( !estaVacia( ptrInicial ) ) { 
                     printf( "Introduzca un caracter para eliminar: " );
-                    scanf( "\n%d", &elemento );
+                    scanf( "\n%f", &elemento );
 
                     /* si encuentra el carácter, lo remueve */
-                    if ( eliminar( &ptrInicial, elemento ) ) { /* elimina elemento */
+                    if ( eliminar( &ptrInicial, elemento ) != -1 ) { /* elimina elemento */
                         printf( "numero %d eliminado.\n", elemento );
                         imprimeLista( ptrInicial );
                     } /* fin de if */
@@ -98,7 +98,7 @@ void instrucciones( void )
 } /* fin de la función instrucciones */
 
  /* Inserta un nuevo valor dentro de la lista en orden */
-void insertar( ptrNodoLista *ptrS, int valor )
+void insertar( ptrNodoLista *ptrS, float valor )
 { 
     ptrNodoLista ptrNuevo; /* apuntador a un nuevo nodo */
     ptrNodoLista ptrAnterior; /* apuntador a un nodo previo de la lista */
@@ -133,13 +133,13 @@ void insertar( ptrNodoLista *ptrS, int valor )
 
     } /* fin de if */
     else {
-    printf( "No se inserto %c. No hay memoria disponible.\n", valor );
+    printf( "No se inserto %f. No hay memoria disponible.\n", valor );
     } /* fin de else */
 
 } /* fin de la función insertar */
 
 /* Elimina un elemento de la lista */
-char eliminar( ptrNodoLista *ptrS, int valor )
+float eliminar( ptrNodoLista *ptrS, float valor )
 { 
     ptrNodoLista ptrAnterior; /* apuntador a un nodo previo de la lista */
     ptrNodoLista ptrActual; /* apuntador al nodo actual de la lista */
@@ -177,7 +177,7 @@ char eliminar( ptrNodoLista *ptrS, int valor )
         } /* fin de if */
     } /* fin de else */
 
-    return '\0';
+    return -1;
 
 } /* fin de la función eliminar */
 
@@ -201,7 +201,7 @@ void imprimeLista( ptrNodoLista ptrActual )
 
         /* mientras no sea el final de la lista */
         while ( ptrActual != NULL ) { 
-            printf( "%d -> ", ptrActual->dato );
+            printf( "%.2f -> ", ptrActual->dato );
             ptrActual = ptrActual->ptrSiguiente; 
         } /* fin de while */
 
