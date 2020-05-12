@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
- /* estructura auto_referenciada */
+/* estructura auto_referenciada */
 struct nodoLista {
     char dato; /* cada nodoLista contiene un caracter */
     struct nodoLista *ptrSiguiente; /* apuntador al siguiente nodo */ 
