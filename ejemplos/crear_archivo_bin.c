@@ -11,7 +11,6 @@ int main()
 { 
     int i; /* contador utilizado para contar de 1 a 100 */
 
-
     struct datosCliente clienteEnBlanco = { 0, "", "", 0.0 }; 
     FILE *ptrCf; /* apuntador al archivo credito.dat */
 

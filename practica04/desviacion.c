@@ -24,7 +24,6 @@ int main(){
     printf("\n\nPromedio = %.2f\nDesviacion = %.2f\n", promedio, desviacion);
 
     return 0;
-    
 }
 
 float calcula_promedio (float *arreglo, int num){
